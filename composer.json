@@ -1,0 +1,29 @@
+{
+  "name": "zanko-khaledi/notifications",
+  "type": "library",
+  "require": {
+    "php": "^8.2.0",
+    "illuminate/support": ">=11.0",
+    "illuminate/database": ">=11.0"
+  },
+  "license": "MIT",
+  "autoload": {
+    "psr-4": {
+      "ZankoKhaledi\\Notifications\\": "src/"
+    }
+  },
+  "authors": [
+    {
+      "name": "zanko khaledi",
+      "email": "zanko.kh75@gmail.com"
+    }
+  ],
+  "extra": {
+    "laravel": {
+      "providers": [
+        "ZankoKhaledi\\Notifications\\NotificationServiceProvider"
+      ]
+    }
+  },
+  "minimum-stability": "dev"
+}
