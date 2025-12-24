@@ -37,6 +37,8 @@ composer require zanko-khaledi/notifications:@dev
 ``` bash
  php artisan vendor:publish --tag=notifications-config
  
+ php artisan vendor:publish --tag=notifications-model
+ 
  php artisan migrate
 ```
 
