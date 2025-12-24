@@ -50,11 +50,18 @@ use App\Notifications\MyNotification; // implements NotificationInterface
 
 $service = app(NotificationService::class);
 
+$user = auth()->user();
+$notifiables = User::query()->where("id", ">", 2)->get();
+
+$notification = app(MyNotification::class);
+$notification->setUser($user)->setTitle("New notification")
+        ->setMessage("Hello World")->setNotifiable($notifiables)
+
 // Send synchronously
-$service->send(new MyNotification());
+$service->send($notification);
 
 // Send asynchronously (queued)
-$service->send(new MyNotification(), true);
+$service->send($notification, true);
 
 ```
 
