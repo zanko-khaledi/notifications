@@ -76,6 +76,10 @@ use App\Notifications\System;
 $user = auth()->user();
 $notifiables = User::query()->where("id", ">", 2)->get();
 
+$notificationService = app(NotificationService::class);
+
+// notifications sent via queue & background processing with pool 
+
 $notificationService->pool([
     Telegram::class,
     System::class
