@@ -200,10 +200,4 @@ src/
 #### Queue driver configured (for async jobs)
 
 ### 📜 License
-
-
----
-
-✅ This README now includes **System driver** alongside **Telegram driver**, installation, features, usage examples, abstract `Notification` class, and package structure.
-
-Would you like me to also add a **Quick Demo Project section** (migration + event + driver + job) so users can test broadcasting and async notifications end-to-end?
+This package is open-sourced software licensed under the MIT license
