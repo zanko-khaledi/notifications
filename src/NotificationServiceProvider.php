@@ -12,7 +12,7 @@ class NotificationServiceProvider extends ServiceProvider
 
         $this->publishes([ __DIR__.'/../config/notifications.php' => config_path('notifications.php') ], 'notifications-config');
 
-        $this->publishes([ __DIR__ . '/../models/Notification.php' => app_path('Models/Notification.php'), ], 'notifications-model');
+        $this->publishes([ __DIR__ . '/models/Notification.php' => app_path('Models/Notification.php'), ], 'notifications-model');
     }
 
     public function register()

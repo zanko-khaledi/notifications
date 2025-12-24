@@ -23,6 +23,19 @@ class Notification extends Model
     ];
 
 
+    public function __construct(array $attributes = [])
+    {
+        parent::__construct($attributes);
+
+        $table ??= config('notifications.table_name');
+
+        if (is_null($table)) {
+            $table = 'notifications';
+        }
+
+        $this->table = $table;
+    }
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);

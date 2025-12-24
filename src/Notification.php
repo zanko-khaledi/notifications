@@ -28,6 +28,8 @@ abstract class Notification
 
     protected string $driver;
 
+    protected array $details;
+
 
     public function __construct()
     {
@@ -36,6 +38,7 @@ abstract class Notification
         $this->notifiable = null;
         $this->notifiables = null;
         $this->user = Auth::user() ?? null;
+        $this->details = [];
     }
 
     /**
@@ -104,12 +107,50 @@ abstract class Notification
         return $this;
     }
 
+    /**
+     * @param string $text
+     * @return $this
+     */
+    public function setTitle(string $text = ''): static
+    {
+        $this->title = $text;
+        return $this;
+    }
 
     /**
-     * @return NotificationModel
+     * @param string $text
+     * @return $this
+     */
+    public function setMessage(string $text = ''): static
+    {
+        $this->message = $text;
+        return $this;
+    }
+
+
+    /**
+     * @param array $data
+     * @return $this
+     */
+    public function setDetails(array $data = []): static
+    {
+       $this->details = $data;
+       return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function getDetails(): array
+    {
+        return $this->details;
+    }
+
+    /**
+     * @return NotificationModel|\Exception|null
      * @throws \Exception
      */
-    public function send(): NotificationModel
+    public function send(): NotificationModel|\Exception|null
     {
         if (is_null($this->user)) {
             throw new \Exception("You have to set user before calling send method!");
@@ -133,7 +174,7 @@ abstract class Notification
                         'user_id' => $this->getUser()?->id,
                         'title' => $this->getTitle() ?? null,
                         'message' => $this->getMessage() ?? null,
-                        'details' => json_encode([]),
+                        'details' => json_encode($this->getDetails()),
                         'created_at' => Carbon::now(),
                         'updated_at' => Carbon::now()
                     ];
@@ -153,7 +194,7 @@ abstract class Notification
         $notification->user_id ??= $this->user?->id;
         $notification->title ??= $this->title;
         $notification->message ??= $this->message;
-        $notification->details ??= [];
+        $notification->details ??= $this->details;
         $notification->created_at = Carbon::now();
         $notification->updated_at = Carbon::now();
         $notification->save();
