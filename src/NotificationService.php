@@ -10,7 +10,6 @@ use ZankoKhaledi\Notifications\Jobs\NotificationJob;
 
 class NotificationService implements NotificationAsyncInterface,NotificationPoolInterface,NotificationServiceInterface
 {
-
     private array $drivers = [];
 
     /**
