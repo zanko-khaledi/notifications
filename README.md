@@ -1,4 +1,33 @@
+
+
+
 # Notifications Package
+
+[
+
+![Latest Version](https://img.shields.io/packagist/v/zanko-khaledi/notifications.svg)
+
+](https://packagist.org/packages/zanko-khaledi/notifications)
+[
+
+![Total Downloads](https://img.shields.io/packagist/dt/zanko-khaledi/notifications.svg)
+
+](https://packagist.org/packages/zanko-khaledi/notifications)
+[
+
+![License](https://img.shields.io/github/license/zanko-khaledi/notifications.svg)
+
+](https://github.com/zanko-khaledi/notifications/blob/master/LICENSE)
+[
+
+![PHP Version](https://img.shields.io/badge/php-%3E%3D8.2-777bb4.svg)
+
+](https://php.net)
+[
+
+![Laravel Version](https://img.shields.io/badge/laravel-%3E%3D11-ff2d20.svg)
+
+](https://laravel.com)
 
 A flexible, event-driven **Laravel package** for managing and dispatching notifications.  
 It provides both **synchronous** and **asynchronous (queued)** notification handling, with support for notification pools, custom drivers, and a base `Notification` class for building reusable notification types.
