@@ -207,6 +207,16 @@ class Telegram extends Notification implements NotificationInterface
 
 ```
 
+## 🤔 Why not just use Laravel's built-in notifications?
+
+Laravel's notification system is great for single-channel, fire-and-forget messages. This package adds what's missing for larger systems:
+
+- **Driver pools** — dispatch the same notification across multiple channels (Telegram, System, etc.) in one call, instead of writing separate `Notification` classes per channel.
+- **First-class async by default** — `send($notification, true)` queues automatically via a dedicated job, no manual `ShouldQueue` boilerplate.
+- **Reusable base class** — build your own notification types once, extend them everywhere, instead of duplicating structure across Laravel's per-notification classes.
+
+Use Laravel's native notifications for simple cases. Use this package when you need pooled, multi-driver, queue-first dispatching.
+
 ## 📂 Package Structure
 
 ```
