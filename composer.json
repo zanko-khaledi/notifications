@@ -4,30 +4,33 @@
   "type": "library",
   "keywords": [
     "laravel",
-    "laravel-notifications",
-    "notifications",
     "php",
-    "notification",
+    "notifications",
+    "laravel-notifications",
     "async-notifications",
-    "asynchronous-notifications",
     "queued-notifications",
-    "queue",
     "laravel-queue",
     "notification-service",
     "notification-pool",
     "notification-driver",
-    "notification-interface",
-    "laravel-package",
-    "php-package",
-    "backend",
-    "messaging"
+    "laravel-package"
   ],
-  "require": {
-    "php": "^8.2.0",
-    "illuminate/support": ">=11.0",
-    "illuminate/database": ">=11.0"
+  "homepage": "https://github.com/zanko-khaledi/notifications",
+  "support": {
+    "issues": "https://github.com/zanko-khaledi/notifications/issues"
   },
   "license": "MIT",
+  "authors": [
+    {
+      "name": "zanko khaledi",
+      "email": "zanko.kh75@gmail.com"
+    }
+  ],
+  "require": {
+    "php": "^8.2",
+    "illuminate/support": "^11.0|^12.0|^13.0",
+    "illuminate/database": "^11.0|^12.0|^13.0"
+  },
   "autoload": {
     "psr-4": {
       "ZankoKhaledi\\Notifications\\": "src/"
@@ -38,12 +41,6 @@
       "ZankoKhaledi\\Notifications\\Tests\\": "tests/"
     }
   },
-  "authors": [
-    {
-      "name": "zanko khaledi",
-      "email": "zanko.kh75@gmail.com"
-    }
-  ],
   "extra": {
     "laravel": {
       "providers": [
@@ -51,10 +48,9 @@
       ]
     }
   },
-  "minimum-stability": "dev",
   "require-dev": {
-    "orchestra/testbench": "10.x-dev",
-    "pestphp/pest": "4.x-dev"
+    "orchestra/testbench": "^10.0",
+    "pestphp/pest": "^4.0"
   },
   "config": {
     "allow-plugins": {
