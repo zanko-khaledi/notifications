@@ -4,26 +4,29 @@ on:
   push:
     branches:
       - master
+
   pull_request:
     branches:
       - master
+
+  workflow_dispatch:
 
 jobs:
   tests:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout
         uses: actions/checkout@v4
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
           php-version: '8.5'
-          extensions: mbstring, xml
+          extensions: mbstring, xml, sqlite3
           coverage: none
 
-      - name: Install Composer dependencies
+      - name: Install dependencies
         run: composer install --prefer-dist --no-interaction --no-progress
 
       - name: Run Pest
