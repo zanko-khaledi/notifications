@@ -12,6 +12,11 @@
       "ZankoKhaledi\\Notifications\\": "src/"
     }
   },
+  "autoload-dev": {
+    "psr-4": {
+         "ZankoKhaledi\\Notifications\\Tests\\": "tests/"
+    }
+  },
   "authors": [
     {
       "name": "zanko khaledi",
@@ -25,5 +30,14 @@
       ]
     }
   },
-  "minimum-stability": "dev"
+  "minimum-stability": "dev",
+  "require-dev": {
+    "orchestra/testbench": "10.x-dev",
+    "pestphp/pest": "4.x-dev"
+  },
+  "config": {
+    "allow-plugins": {
+      "pestphp/pest-plugin": true
+    }
+  }
 }
