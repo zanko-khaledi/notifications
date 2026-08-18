@@ -1,6 +1,27 @@
 {
   "name": "zanko-khaledi/notifications",
+  "description": "A Laravel notification service for synchronous and asynchronous notifications with queued jobs and notification pooling.",
   "type": "library",
+  "keywords": [
+    "laravel",
+    "laravel-notifications",
+    "notifications",
+    "php",
+    "notification",
+    "async-notifications",
+    "asynchronous-notifications",
+    "queued-notifications",
+    "queue",
+    "laravel-queue",
+    "notification-service",
+    "notification-pool",
+    "notification-driver",
+    "notification-interface",
+    "laravel-package",
+    "php-package",
+    "backend",
+    "messaging"
+  ],
   "require": {
     "php": "^8.2.0",
     "illuminate/support": ">=11.0",
@@ -14,7 +35,7 @@
   },
   "autoload-dev": {
     "psr-4": {
-         "ZankoKhaledi\\Notifications\\Tests\\": "tests/"
+      "ZankoKhaledi\\Notifications\\Tests\\": "tests/"
     }
   },
   "authors": [
