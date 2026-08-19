@@ -92,7 +92,11 @@ $notification->setUser($user)->setTitle("New notification")
 $service->send($notification);
 
 // Send asynchronously (queued)
-$service->send($notification, true);
+$service->send($notification,async:true);
+
+// Determine queue and connection
+$service->onQueue("notifications")->onConnection("redis")
+  ->send($notification,async:true);
 
 ```
 
@@ -131,23 +135,7 @@ use ZankoKhaledi\Notifications\Contracts\NotificationInterface;
 
 class SystemNotification extends Notification implements NotificationInterface
 {
-    public function __construct()
-    {
-        parent::__construct();
-    }
-    
-    public function setTitle(string $text = "") : static
-    {
-       $this->title = $text;
-       return $this;
-    }
-    
-    public function setMessage(string $text = "") : static
-    {
-        $this->message = $text;
-        return $this;
-    }
-    
+    #[override] 
     public function send() : \ZankoKhaledi\Notifications\Models\Notification
     {
        $model = parent::send();
@@ -174,18 +162,8 @@ use ZankoKhaledi\Notifications\Notification;
 
 class Telegram extends Notification implements NotificationInterface
 {
-    public function setTitle(string $text = ''): static
-    {
-        $this->title = $text;
-        return $this;
-    }
-
-    public function setMessage(string $text = ''): static
-    {
-        $this->message = $text;
-        return $this;
-    }
-
+    
+    #[override]
     public function send(): ModelsNotification
     {
         $model = parent::send();

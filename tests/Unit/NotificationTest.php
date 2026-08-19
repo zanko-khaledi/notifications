@@ -2,9 +2,6 @@
 
 declare(strict_types=1);
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Queue;
 use ZankoKhaledi\Notifications\Contracts\NotificationInterface;
 use ZankoKhaledi\Notifications\Jobs\NotificationJob;
@@ -39,7 +36,7 @@ it('dispatches notification asynchronously', function () {
 
     $service = app(NotificationService::class);
 
-    $service->send($fakeNotification, async: true);
+    $service->onQueue('notifications')->onConnection('redis')->send($fakeNotification, async: true);
 
     Queue::assertPushed(NotificationJob::class, 1);
 });
@@ -62,14 +59,10 @@ it('sends notification when the job is executed', function () {
 
 
 it('sends notifications via pool method', function () {
-    
-    $notificationA = new class extends Notification implements NotificationInterface{
 
-    };
+    $notificationA = new class extends Notification implements NotificationInterface {};
 
-    $notificationB = new class extends Notification implements NotificationInterface{
-
-    };
+    $notificationB = new class extends Notification implements NotificationInterface {};
 
     Queue::fake();
 
@@ -78,7 +71,7 @@ it('sends notifications via pool method', function () {
     $service->pool([
         $notificationA::class,
         $notificationB::class
-    ])->then(function(NotificationInterface $notification) {
+    ])->then(function (NotificationInterface $notification) {
         return $notification->setTitle("Title")->setMessage("Hello World");
     });
 

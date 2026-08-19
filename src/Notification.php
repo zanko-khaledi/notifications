@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 abstract class Notification
 {
@@ -93,6 +94,16 @@ abstract class Notification
     }
 
     /**
+     * @param User|null $user
+     * @return $this
+     */
+    public function setSender(?User $user = null):static
+    {
+        $this->user ??= $user;
+        return $this;
+    }
+
+    /**
      * @param Model|Collection|null $notifiable
      * @return $this
      */
@@ -153,7 +164,7 @@ abstract class Notification
     public function send(): NotificationModel|\Exception|null
     {
         if (is_null($this->user)) {
-            throw new \Exception("You have to set user before calling send method!");
+            throw new \Exception("You have to set user or sender before calling send method!");
         }
         if (is_null($this->notifiable) && is_null($this->notifiables)) {
             throw new \Exception("You have to set notifiable before calling send method!");
