@@ -7,10 +7,13 @@ use ZankoKhaledi\Notifications\contracts\NotificationInterface;
 use ZankoKhaledi\Notifications\Contracts\NotificationPoolInterface;
 use ZankoKhaledi\Notifications\Contracts\NotificationServiceInterface;
 use ZankoKhaledi\Notifications\Jobs\NotificationJob;
+use ZankoKhaledi\Notifications\Jobs\UniqueNotificationJob;
 
-class NotificationService implements NotificationAsyncInterface,NotificationPoolInterface,NotificationServiceInterface
+class NotificationService implements NotificationAsyncInterface, NotificationPoolInterface, NotificationServiceInterface
 {
     private array $drivers = [];
+
+    private(set) bool $unique = false;
 
     /**
      * @param NotificationInterface $notification
@@ -19,10 +22,27 @@ class NotificationService implements NotificationAsyncInterface,NotificationPool
      */
     public function send(NotificationInterface $notification, bool $async = false): void
     {
-        match ($async) {
-            true => dispatch(new NotificationJob($notification)),
-            default => $notification->send()
-        };
+        if (!$async) {
+            $notification->send();
+            return;
+        }
+
+        if ($this->unique) {
+            dispatch(new UniqueNotificationJob($notification));
+        } else {
+            dispatch(new NotificationJob($notification));
+        }
+
+        $this->unique = false;
+    }
+
+    /**
+     * @return $this
+     */
+    public function shoudBeUnique():static
+    {
+        $this->unique = true;
+        return $this;
     }
 
     /**
@@ -45,7 +65,7 @@ class NotificationService implements NotificationAsyncInterface,NotificationPool
             $result = $closure(app($notification));
 
             if ($result instanceof NotificationInterface) {
-                $this->send($result, true);
+                $this->send($result, async: true);
             }
         }
     }

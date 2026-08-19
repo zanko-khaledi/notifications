@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 abstract class Notification
 {
@@ -33,7 +34,9 @@ abstract class Notification
 
     public function __construct()
     {
-        $this->notification = new NotificationModel();
+        $this->notification = new NotificationModel([
+            'uuid' => (string)Str::uuid()
+        ]);
         $this->title = "Notification";
         $this->notifiable = null;
         $this->notifiables = null;
@@ -93,6 +96,16 @@ abstract class Notification
     }
 
     /**
+     * @param User|null $user
+     * @return $this
+     */
+    public function setSender(?User $user = null):static
+    {
+        $this->user ??= $user;
+        return $this;
+    }
+
+    /**
      * @param Model|Collection|null $notifiable
      * @return $this
      */
@@ -144,6 +157,14 @@ abstract class Notification
     public function getDetails(): array
     {
         return $this->details;
+    }
+
+    /**
+     * @return string
+     */
+    public function getUuid(): string|null
+    {
+        return $this->notification?->uuid;
     }
 
     /**

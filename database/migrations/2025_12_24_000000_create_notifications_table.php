@@ -13,6 +13,7 @@ return new class extends  Migration {
          $table = config("notifications.table_name") ?? "notifications";
          Schema::create($table,function (Blueprint $table){
              $table->id();
+             $table->uuid('uuid')->unique();
              $table->string('driver')->nullable();
              $table->nullableMorphs('notifiable', 'notifiable_index');
              $table->foreignId('user_id')->nullable()->index('notifications_user_id_index')

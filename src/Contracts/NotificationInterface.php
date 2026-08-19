@@ -19,4 +19,5 @@ interface NotificationInterface
 
     public function getUser():?User;
     public function getNotifiable():Model|Collection|null;
+    public function getUuid():string;
 }
