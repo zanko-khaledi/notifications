@@ -135,7 +135,7 @@ use ZankoKhaledi\Notifications\Contracts\NotificationInterface;
 
 class SystemNotification extends Notification implements NotificationInterface
 {
-    #[override] 
+    #[\Override] 
     public function send() : \ZankoKhaledi\Notifications\Models\Notification
     {
        $model = parent::send();
@@ -163,7 +163,7 @@ use ZankoKhaledi\Notifications\Notification;
 class Telegram extends Notification implements NotificationInterface
 {
     
-    #[override]
+    #[\Override]
     public function send(): ModelsNotification
     {
         $model = parent::send();
